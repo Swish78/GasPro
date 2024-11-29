@@ -1,0 +1,28 @@
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block content %}#}
+{#<div class="max-w-md mx-auto bg-white p-8 rounded shadow-lg">#}
+{#    <h2 class="text-2xl font-bold text-center mb-6">Submit a Service Request</h2>#}
+{#    <form method="POST" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded">Submit Request</button>#}
+{#    </form>#}
+{#</div>#}
+{#{% endblock %}#}
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto mt-8">
+    <h1 class="text-2xl font-bold mb-6 text-center">Submit a Service Request</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+            Submit Request
+        </button>
+    </form>
+</div>
+{% endblock %}

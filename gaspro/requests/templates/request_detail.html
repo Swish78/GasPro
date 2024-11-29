@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6">Request Details</h2>
+    <div class="bg-white p-6 rounded shadow-lg">
+        <p><strong>Customer:</strong> {{ request.customer.username }}</p>
+        <p><strong>Request Type:</strong> {{ request.get_request_type_display }}</p>
+        <p><strong>Details:</strong> {{ request.details }}</p>
+        <p><strong>File:</strong> <a href="{{ request.files.url }}" class="text-blue-500" target="_blank">View attached file</a></p>
+        <p><strong>Status:</strong> {{ request.status }}</p>
+        <p><strong>Created at:</strong> {{ request.created_at }}</p>
+        <p><strong>Resolved at:</strong> {{ request.resolved_at }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="status">Update Status:</label>
+            <select name="status" id="status" class="form-select">
+                <option value="Pending" {% if request.status == "Pending" %}selected{% endif %}>Pending</option>
+                <option value="In Progress" {% if request.status == "In Progress" %}selected{% endif %}>In Progress</option>
+                <option value="Resolved" {% if request.status == "Resolved" %}selected{% endif %}>Resolved</option>
+            </select>
+            <button type="submit" class="w-full bg-green-500 text-white p-2 rounded mt-4">Update Status</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

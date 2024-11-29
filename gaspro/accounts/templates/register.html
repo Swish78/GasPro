@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg space-y-6">
+    <h2 class="text-3xl font-semibold text-center text-gray-800">Create an Account on GasPro</h2>
+
+    <!-- Display form errors if there are any -->
+    {% if form.errors %}
+    <div class="text-red-500 mb-4 p-4 bg-red-50 rounded-md border border-red-200">
+        <ul class="list-disc pl-5">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'register' %}" class="space-y-6">
+        {% csrf_token %}
+
+        <!-- Username Field -->
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+            {{ form.username }}
+        </div>
+
+        <!-- Password Field -->
+        <div class="mb-4">
+            <label for="password1" class="block text-sm font-medium text-gray-700">Password</label>
+            {{ form.password1 }}
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="mb-4">
+            <label for="password2" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+            {{ form.password2 }}
+        </div>
+
+        <!-- Hidden staff field, default customer -->
+        {{ form.is_staff }}
+
+        <div class="mb-6 text-center">
+            <button type="submit" class="w-full py-3 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition duration-200">
+                Register
+            </button>
+        </div>
+
+        <div class="text-center text-sm text-gray-500">
+            Already have an account? <a href="{% url 'login' %}" class="text-blue-500 hover:underline">Login here</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

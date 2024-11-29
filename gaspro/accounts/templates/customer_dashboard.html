@@ -1,0 +1,79 @@
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block content %}#}
+{#<div class="max-w-4xl mx-auto">#}
+{#    <h2 class="text-2xl font-bold mb-6">Welcome, {{ user.username }}!</h2>#}
+{#    <div class="bg-white p-6 rounded shadow-lg">#}
+{#    <a href="{% url 'submit_request' %}" class="mb-4 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">#}
+{#    Submit New Request#}
+{#</a>#}
+{##}
+{#        <h3 class="text-xl font-semibold mb-4">Your Service Requests</h3>#}
+{#        <ul class="space-y-4">#}
+{#            {% for request in requests %}#}
+{#            <li class="border p-4 rounded shadow-sm">#}
+{#                <p><strong>Type:</strong> {{ request.get_request_type_display }}</p>#}
+{#                <p><strong>Status:</strong> {{ request.status }}</p>#}
+{#                <p><strong>Created at:</strong> {{ request.created_at }}</p>#}
+{#                <a href="{% url 'request_tracking' %}" class="text-blue-500 hover:underline">Track more requests</a>#}
+{#            </li>#}
+{#            {% empty %}#}
+{#            <li>No requests submitted yet. <a href="{% url 'submit_request' %}" class="text-blue-500 hover:underline">Submit a request</a></li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </div>#}
+{#</div>#}
+{#{% endblock %}#}
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto mt-8">
+    <!-- Welcome Message -->
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Welcome, {{ user.username }}!</h2>
+
+    <!-- Submit New Request Button -->
+    <div class="text-right mb-6">
+        <a href="{% url 'submit_request' %}"
+           class="inline-block bg-blue-500 text-white px-6 py-2 rounded-md shadow hover:bg-blue-600">
+            + Submit New Request
+        </a>
+    </div>
+
+    <!-- Service Requests Section -->
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h3 class="text-xl font-semibold text-gray-700 mb-4">Your Service Requests</h3>
+
+        <ul class="space-y-6">
+            {% for request in requests %}
+            <li class="border-l-4 border-blue-500 p-4 rounded-md shadow-sm bg-gray-50">
+                <div class="flex justify-between items-center">
+                    <p class="text-lg font-medium">
+                        <strong>Type:</strong> {{ request.get_request_type_display }}
+                    </p>
+                    <span class="text-sm px-3 py-1 rounded-full {{ request.status|lower|yesno:'bg-green-200 bg-yellow-200' }} text-gray-700">
+                        {{ request.status }}
+                    </span>
+                </div>
+                <p class="text-sm text-gray-600 mt-2">
+                    <strong>Created at:</strong> {{ request.created_at|date:"F d, Y H:i" }}
+                </p>
+            </li>
+            {% empty %}
+            <li class="text-center text-gray-600">
+                No requests submitted yet.
+                <a href="{% url 'submit_request' %}"
+                   class="text-blue-500 hover:underline">
+                    Submit a request
+                </a>
+            </li>
+            {% endfor %}
+        <div class="mt-4">
+                    <a href="{% url 'request_tracking' %}"
+                       class="text-blue-500 text-sm font-medium hover:underline">
+                        Track Request Details
+                    </a>
+                </div>
+        </ul>
+    </div>
+</div>
+{% endblock %}

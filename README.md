@@ -40,7 +40,6 @@ cd GasPro
 
 - For **Backend** (Django):
   ```bash
-  cd gaspro
   pip install -r requirements.txt
   ```
 

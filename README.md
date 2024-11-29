@@ -1,6 +1,6 @@
 # GasPro
 
-GasPro is a web application designed for managing service requests in a Gas provider company. The application allows customers to register and submit service requests, track their status, and view their account information. Staff can log in to manage service requests, provide support to customers, and track the progress of the requests.
+GasPro is a web application designed to manage service requests related to gas utility services. Customers can register, submit service requests, and track their request statuses. Staff can log in to manage service requests, provide customer support, and track request progress.
 
 ## Features
 
@@ -22,7 +22,7 @@ GasPro is a web application designed for managing service requests in a Gas prov
 
 - **Backend:**
   - Django (with Django REST Framework)
-  - sqlite for database management
+  - SQLite for database management
 
 - **Authentication:**
   - Role-Based Access Control (RBAC) for customer and staff access
